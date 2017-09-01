@@ -1,0 +1,41 @@
+.button{
+	font: 500 14px/14px $header-font-family;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	border-radius: 5px;
+	&.inverted{
+		color: $white;
+		&:hover{
+			background-color: scale-color($white, $lightness: -15%);
+		}
+	}
+	&--small{
+		padding: 10px 20px;
+	}
+}
+
+.special-icon-button{
+	&.primary{
+		.button{
+			position: relative;
+			border: 2px solid $primary-color;
+			color: $body-font-color;
+		}
+		.roIcon{
+			position: absolute;
+			left: -58px;
+			top: -2px; // accounts for border
+			border-top: 2px solid $primary-color;	
+			border-left: 2px solid $primary-color;	
+			border-bottom: 2px solid $primary-color;
+			
+			height: 58px;
+			width: 58px;
+			line-height: 58px;
+			text-align: center;
+		}
+	}
+	.button{
+		background-color: transparent;
+	}
+}

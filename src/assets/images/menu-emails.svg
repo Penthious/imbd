@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="19px" viewBox="0 0 21 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dashboard" transform="translate(-35.000000, -363.000000)" fill-rule="nonzero" fill="#FFFFFF">
+            <g id="iconmonstr-email-9" transform="translate(35.000000, 363.000000)">
+                <path d="M16.2291667,6.78228833 C16.2291667,6.78228833 11.79775,6.53198333 10.25,8.23901833 C11.9583333,4.55885833 16.2291667,3.77562167 16.2291667,3.77562167 L16.2291667,2.27228833 L20.5,5.278955 L16.2291667,8.29990333 L16.2291667,6.78228833 Z M0.0222083333,18.010685 L20.4769375,18.010685 L10.25,9.28609 L0.0222083333,18.010685 L0.0222083333,18.010685 Z M1.45122917,7.48735167 L10.2414583,1.85887167 L12.8492292,3.52606833 C13.4573958,3.18105333 14.037375,2.92097667 14.5174167,2.73381167 L10.2414583,0 L0,6.55829167 L0,15.936085 L6.27983333,10.5789567 L1.45122917,7.48735167 L1.45122917,7.48735167 Z M14.9069167,11.164505 L20.5,15.936085 L20.5,7.20773167 L14.9069167,11.164505 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,28 @@
+.bg-img{
+  background-image: url('http://lorempixel.com/1920/900/');
+  background-size: cover;
+  padding: 50px 0;
+  height: 400px;
+  color: #fff;
+  
+  @include breakpoint(medium){
+    height: 600px;
+  }
+  @include breakpoint(large){
+    height: 900px;
+  }
+}
+
+.focus-content{
+  height: 100%;
+}
+
+.scroll{
+  color: $white;
+}
+
+.font-awesome{
+  color: $primary-color;
+  font-size: 30px !important;
+  margin-left: 25px;
+}

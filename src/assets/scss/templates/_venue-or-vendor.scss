@@ -1,0 +1,14 @@
+.vendor-or-venue{
+    .icon,
+    .title,
+    p{
+        margin-bottom: 20px;
+    }
+    @include breakpoint(large){
+        .icon,
+        .title,
+        p{
+            margin-bottom: 40px;
+        }
+    }
+}

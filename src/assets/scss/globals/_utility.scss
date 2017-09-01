@@ -1,0 +1,168 @@
+/** Background Utility Classes **/
+.bg-primary{
+	background-color: $primary-color;
+}
+.bg-white{
+	background-color: $white;
+}
+.bg-secondary{
+	background-color: $secondary-color;
+}
+.bg-dark-gray{
+	background-color: $dark-gray;
+}
+.bg-black{
+	background-color: $black;
+}
+.bg-medium-gray{
+	background-color: $medium-gray;
+}
+.bg-light-gray{
+	background-color: $light-gray;
+}
+
+/** Text Utility Classes **/
+.primary-color{
+	color: $primary-color;
+}
+.secondary-color{
+	color: $secondary-color;
+}
+.dark-gray{
+	color: $dark-gray;
+}
+.medium-gray{
+	color: $medium-gray;
+}
+.light-gray{
+	color: $light-gray;
+}
+.white{
+	color: $white;
+}
+.black{
+	color: $black;
+}
+.uppercase{
+	text-transform: uppercase;
+}
+.links-body-color{
+	a{
+		color: $body-font-color;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+}
+.underline{
+	text-decoration: underline;
+}
+
+/** Text Alignment **/
+.text-center{
+	text-align: center;
+}
+.text-right{
+	text-align: right;
+}
+.text-left{
+	text-align: left;
+}
+@include breakpoint(medium down){
+	.medium-text-center{
+		text-align: center;
+	}
+}
+@include breakpoint(small only){
+	.small-text-center{
+		text-align: center;
+	}
+}
+
+
+/** Margin Utility Classes **/
+.marg-btm-0{
+	margin-bottom: 0px !important;
+}
+.marg-btm-10{
+	margin-bottom: 10px;
+}
+.marg-btm-20{
+	margin-bottom: 20px;
+}
+.marg-btm-30{
+	margin-bottom: 30px;
+}
+.marg-btm-40{
+	margin-bottom: 40px;
+}
+.marg-btm-50{
+	margin-bottom: 50px;
+}
+.marg-btm-60{
+	margin-bottom: 60px;
+}
+.marg-top-0{
+	margin-top: 0px;
+}
+.marg-top-10{
+	margin-top: 10px;
+}
+.marg-top-20{
+	margin-top: 20px;
+}
+.marg-top-30{
+	margin-top: 30px;
+}
+.marg-top-40{
+	margin-top: 40px;
+}
+.marg-top-50{
+	margin-top: 50px;
+}
+.marg-top-60{
+	margin-top: 60px;
+}
+/** Padding Utility Classes **/
+.pad-btm-0{
+	padding-bottom: 0px !important;
+}
+.pad-btm-10{
+	padding-bottom: 10px;
+}
+.pad-btm-20{
+	padding-bottom: 20px;
+}
+.pad-btm-30{
+	padding-bottom: 30px;
+}
+.pad-btm-40{
+	padding-bottom: 40px;
+}
+.pad-btm-50{
+	padding-bottom: 50px;
+}
+.pad-btm-60{
+	padding-bottom: 60px;
+}
+.pad-top-0{
+	padding-top: 0px;
+}
+.pad-top-10{
+	padding-top: 10px;
+}
+.pad-top-20{
+	padding-top: 20px;
+}
+.pad-top-30{
+	padding-top: 30px;
+}
+.pad-top-40{
+	padding-top: 40px;
+}
+.pad-top-50{
+	padding-top: 50px;
+}
+.pad-top-60{
+	padding-top: 60px;
+}

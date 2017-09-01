@@ -1,0 +1,33 @@
+.footer{
+	background-color: $light-gray;
+	padding: 40px 0;
+	@include breakpoint(small only){
+		text-align: center;
+		.cta-wrap{
+			margin-bottom: 20px;
+		}
+	}
+	.menu-copy-wrap{
+		text-align: center;
+		@include breakpoint(medium){
+			text-align: right;
+		}
+		small a{
+			color: $dark-gray;
+		}
+	}
+	.footer-menu{
+		li{
+			display: inline-block;
+			vertical-align: middle;
+		}
+		a{
+			font: 500 14px/14px $header-font-family;
+			text-transform: uppercase;
+			margin: 10px;
+			@include breakpoint(medium){
+				margin-left: 20px;
+			}
+		}
+	}
+}

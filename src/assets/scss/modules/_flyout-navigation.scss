@@ -1,0 +1,53 @@
+.flyout-navigation{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: $medium-gray;
+	width: 100vw;
+	z-index: 9999;
+	overflow-y: auto;
+	@include breakpoint(medium){
+		width: 490px; 
+	}
+	.flyout-actions{
+		height: 110px;
+		padding-bottom: 20px;
+	}
+	.flyout-menu{
+		table{
+			margin-top: 40px; 
+			height: 100%;
+		}
+		tr,
+		tbody{
+			background-color: transparent;
+			text-align: center;
+			td{
+				padding: 20px 0;
+			}
+		}
+		a{
+			font: 500 26px/32px $header-font-family;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			color: $white;
+		}
+	}
+	.close-flyout{
+		display: inline-block;
+		border: 2px solid $white;
+		padding: 15px;
+		color: $white;
+	}
+	.flyout-btn{
+		display: inline-block;
+		text-align: center;
+		width: 115px;
+    padding: 10px 0;
+    text-transform: uppercase;
+		border: 2px solid $white;
+		color: $white;
+		font: 500 14px/14px $header-font-family;
+	}
+}

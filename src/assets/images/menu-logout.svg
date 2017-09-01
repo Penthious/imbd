@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="19px" viewBox="0 0 22 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dashboard" transform="translate(-34.000000, -575.000000)" fill-rule="nonzero" fill="#FFFFFF">
+            <g id="iconmonstr-log-out-9" transform="translate(34.000000, 575.000000)">
+                <path d="M14.6666667,6.65 L14.6666667,2.85 L22,9.5 L14.6666667,16.15 L14.6666667,12.35 L7.33333333,12.35 L7.33333333,6.65 L14.6666667,6.65 Z M12.8333333,16.15 L12.8333333,16.07115 C11.7535,16.7219 10.5031667,17.1 9.16666667,17.1 C5.12325,17.1 1.83333333,13.69045 1.83333333,9.5 C1.83333333,5.30955 5.12325,1.9 9.16666667,1.9 C10.5031667,1.9 11.7535,2.2781 12.8333333,2.92885 L12.8333333,0.7961 C11.7095,0.2869 10.4710833,0 9.16666667,0 C4.10483333,0 0,4.25315 0,9.5 C0,14.74685 4.10483333,19 9.16666667,19 C10.4710833,19 11.7095,18.7131 12.8333333,18.2039 L12.8333333,16.15 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
