@@ -1,6 +1,5 @@
 const config = {
-    APP_URL: JSON.stringify('https://api.legit-local.redolive.us/'),
-    STRIPE_PUBLIC: JSON.stringify(''),
+    ombdKey: '4e985b8b',
 };
 
 export default config;
