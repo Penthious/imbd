@@ -4,8 +4,8 @@ export default {
     directorSearch: "/directors",
     actorSearch: "/actors",
     votesSearch: "/votes",
-    titleShow: "/title/show/",
-    directorShow: "/director/show/",
+    titleShow: "/title/show",
+    directorShow: "/director/show",
     actorShow: "/actor/show",
 
     notFound: "*",

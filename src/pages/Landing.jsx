@@ -4,7 +4,7 @@ import Axios from "axios";
 import { Route, Switch } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
-import DisplayData from "../components/DisplayData";
+import DisplayItem from "../components/DisplayItem";
 
 const INITIAL_STATE = {
     search: { value: "", search: "" },
@@ -36,11 +36,6 @@ class Landing extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log("========");
-        console.log("========");
-        console.log("Landing-42", this.state.search);
-        console.log("========");
-        console.log("========");
         this.processSearch(this.state.search);
         this.setState({ search: {} });
     };
@@ -51,11 +46,6 @@ class Landing extends Component {
         if (searchParam === "title") {
             this.getMovies(url, formattedSearchValue);
         } else if (searchParam === "actor") {
-            console.log("========");
-            console.log("========");
-            console.log("Landing-41", "here");
-            console.log("========");
-            console.log("========");
             this.getActors(url, formattedSearchValue);
         } else if (searchParam === "director") {
             this.getDirectors(url, formattedSearchValue);
@@ -67,25 +57,28 @@ class Landing extends Component {
         .then(
             response => console.log(response) ||
             this.setState({
-                ...INITIAL_STATE,
+                ...this.state,
+                search: { value: "", search: "" },
                 movies: { movies: response.data !== null ? response.data : [] },
             }),
         )
         .catch(error => console.log(error));
     getActors = (url, param) => Axios.get(`${url}find/person?name=${param}`)
         .then(
-            response => console.log(response) ||
+            response => console.log(response.data) ||
             this.setState({
-                ...INITIAL_STATE,
-                movies: response.data !== null ? response.data : [],
+                ...this.state,
+                search: { value: "", search: "" },
+                actors: { actors: response.data !== null ? response.data : [] },
             }),
         )
         .catch(error => console.log(error));
-    getDirectors = (url, param) => Axios.get(`${url}find/movie?title=${param}`)
+    getDirectors = (url, param) => Axios.get(`${url}find/person?name=${param}`)
         .then(
             response => console.log(response) ||
             this.setState({
-                ...INITIAL_STATE,
+                ...this.state,
+                search: { value: "", search: "" },
                 movies: response.data !== null ? response.data : [],
             }),
         )
@@ -94,7 +87,8 @@ class Landing extends Component {
         .then(
             response => console.log(response) ||
             this.setState({
-                ...INITIAL_STATE,
+                ...this.state,
+                search: { value: "", search: "" },
                 movies: response.data !== null ? response.data : [],
             }),
         )
@@ -112,17 +106,18 @@ class Landing extends Component {
                                 handleSubmit={this.handleSubmit}
                                 handleChange={this.handleChange}
                                 name="Search for movies"
-                                search="title"
                                 value={this.state.search.value}
                                 routes={this.props.routes}
                                 {...props}
+                                {...this.state}
+                                search="title"
                             />
                         )}
                     />
                     <Route
                         path={`${this.props.routes.titleShow}/:title`}
                         render={props => (
-                            <Search name="Test" routes={this.props.routes} {...props} />
+                            <DisplayItem name="Test" routes={this.props.routes} {...props} />
                         )}
                     />
                     <Route
@@ -133,6 +128,7 @@ class Landing extends Component {
                                 handleChange={this.handleChange}
                                 search="actor"
                                 value={this.state.search.value}
+                                actors={this.state.actors.actors}
                                 name="Search for actors"
                                 routes={this.props.routes}
                                 {...props}
@@ -142,7 +138,7 @@ class Landing extends Component {
                     <Route
                         path={`${this.props.routes.actorShow}/:actor`}
                         render={props => (
-                            <Search name="Test" routes={this.props.routes} {...props} />
+                            <DisplayItem name="Test" routes={this.props.routes} {...props} />
                         )}
                     />
                     <Route
@@ -162,7 +158,7 @@ class Landing extends Component {
                     <Route
                         path={`${this.props.routes.directorShow}/:director`}
                         render={props => (
-                            <Search name="Test" routes={this.props.routes} {...props} />
+                            <DisplayItem name="Test" routes={this.props.routes} {...props} />
                         )}
                     />
                     <Route
@@ -180,9 +176,6 @@ class Landing extends Component {
                         )}
                     />
                 </Switch>
-                {this.state.movies.movies.length > 0
-                    ? <DisplayData data={this.state.movies.movies} />
-                    : null}
             </div>
         );
     }

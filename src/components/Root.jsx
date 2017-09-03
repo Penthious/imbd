@@ -23,7 +23,6 @@ class Root extends React.Component {
                             render={props => <Landing routes={routes} {...props} />}
                         />
                         <Route
-                            exact
                             path={routes.titleSearch}
                             render={props => <Landing routes={routes} {...props} />}
                         />
