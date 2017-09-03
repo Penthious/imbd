@@ -17,9 +17,9 @@ export default (totalItems, currentPage, pageSize) => {
     }
 
     const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
+    const endIndex = Math.min((startIndex + pageSize) - 1, totalItems - 1);
 
-    const pages = new Array(endPage - startPage + 1).fill().map((_, index) => startPage + index);
+    const pages = new Array(endPage - (startPage + 1)).fill().map((_, index) => startPage + index);
 
     return {
         totalItems,
