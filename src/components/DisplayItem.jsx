@@ -9,9 +9,13 @@ class DisplayItem extends Component {
     }
 
     renderMovie = (movie, index) => (
-        <div key={`${movie.title}${index}`}>
-            <p>{movie.title}</p>
-            <a href={movie.url}>See On IMBD</a>
+        <div key={`${movie.title}${index}`} className="row">
+            <div className="column small-offset-3">
+                <p>{movie.title}</p>
+            </div>
+            <div className="column">
+                <a href={movie.url}>See On IMBD</a>
+            </div>
         </div>
     );
 
@@ -38,35 +42,57 @@ class DisplayItem extends Component {
         } = this.props.location.state;
         return (
             <div>
-                {rating ? <p>{rating}</p> : null}
+                <div className="row marg-top-20 small-offset-4">
+                    <div className="column">
+                        {poster ?
+                            <img src={poster.large} alt="image"
+                                 style={{ width: '300px', height: '600px' }} />
+                            : <img src={image.poster} alt="image"
+                                   style={{ width: '300px', height: '600px' }} />}
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="column small-offset-4 small-2">
+                        {title ? <p>{title}</p> : null}
+                    </div>
+                    <div className="column small-2">
+                        {rating ? <p>Rating: {rating}</p> : null}
+                    </div>
+                </div>
+                <div className="row small-offset-2">
+                    <div className="column">
+                        {description ? <p>{description}</p> : null}
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="column small-offset-5">
+                        {url ? <a href={url.url}>View on IMBD</a> : null}
+                    </div>
+                </div>
                 <hr />
-                {description ? <p>{description}</p> : null}
-                {title ? <p>{title}</p> : null}
-                {poster ? <img src={poster.large} alt="" /> : <img src={image.poster} />}
-                {url ? <a href={url.url}>View on IMBD</a> : null}
                 {filmography
                     ? <div>
                         {filmography.actor
-                              ? this.renderMovies(
-                                    filmography.actor,
-                                    this.props.routes.actorShow,
-                                    'actor',
-                                )
-                              : null}
+                            ? this.renderMovies(
+                                filmography.actor,
+                                this.props.routes.actorShow,
+                                'actor',
+                            )
+                            : null}
                         {filmography.actress
-                              ? this.renderMovies(
-                                    filmography.actress,
-                                    this.props.routes.actorShow,
-                                    'actor',
-                                )
-                              : null}
+                            ? this.renderMovies(
+                                filmography.actress,
+                                this.props.routes.actorShow,
+                                'actor',
+                            )
+                            : null}
                         {filmography.director
-                              ? this.renderMovies(
-                                    filmography.director,
-                                    this.props.routes.directorShow,
-                                    'director',
-                                )
-                              : null}
+                            ? this.renderMovies(
+                                filmography.director,
+                                this.props.routes.directorShow,
+                                'director',
+                            )
+                            : null}
                     </div>
                     : null}
             </div>
