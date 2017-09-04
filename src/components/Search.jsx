@@ -4,14 +4,24 @@ import DisplayData from './DisplayData';
 
 const Search = props => console.log(props, 'testing') ||
 <div>
-    {props.name}
     <form onSubmit={event => props.handleSubmit(event)}>
-        <input
-            type="text"
-            value={props.value}
-            onChange={event => props.handleChange(event, props.search)}
-        />
-        <button type="submit"> SUBMIT </button>
+        <div className="row large-offset-4">
+           <div className="column">
+               {props.name}
+           </div>
+        </div>
+        <div className="row large-offset-3">
+            <div className="column large-6">
+                <input
+                    type="text"
+                    value={props.value}
+                    onChange={event => props.handleChange(event, props.search)}
+                />
+            </div>
+            <div className="column">
+                <button type="submit" className="button button--small"> SUBMIT </button>
+            </div>
+        </div>
     </form>
     {props.movies.movies.length > 0
         ? <DisplayData data={props.movies.movies} url={props.routes.titleShow} />

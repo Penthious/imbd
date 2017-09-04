@@ -54,31 +54,37 @@ class DisplayData extends Component {
     Renders the pagination buttons
      */
     renderPagination = () => (
-        <div>
-            {this.state.startPage !== this.state.currentPage
-                ? <button
-                    onClick={() => this.handlePagination(this.state.currentPage - 1)}
-                    className="button"
-                  >
-                    {'<'}
-                </button>
-                : null}
+        <div className="row">
+            <div className="column small-1">
+                {this.state.startPage !== this.state.currentPage
+                    ? <button
+                        onClick={() => this.handlePagination(this.state.currentPage - 1)}
+                        className="button"
+                    >
+                        {'<'}
+                    </button>
+                    : null}
+            </div>
             {this.state.pages.map(page => (
-                <button
-                    onClick={() => this.handlePagination(page)}
-                    className={this.state.currentPage === page ? 'button hollow' : 'button'}
-                >
-                    {page}
-                </button>
+                <div className="column small-1">
+                    <button
+                        onClick={() => this.handlePagination(page)}
+                        className={this.state.currentPage === page ? 'button hollow' : 'button'}
+                    >
+                        {page}
+                    </button>
+                </div>
             ))}
-            {this.state.endPage !== this.state.currentPage
-                ? <button
-                    onClick={() => this.handlePagination(this.state.currentPage + 1)}
-                    className="button"
-                  >
-                    {'>'}
-                </button>
-                : null}
+            <div className="column small-1">
+                {this.state.endPage !== this.state.currentPage
+                    ? <button
+                        onClick={() => this.handlePagination(this.state.currentPage + 1)}
+                        className="button"
+                    >
+                        {'>'}
+                    </button>
+                    : null}
+            </div>
         </div>
     );
 
@@ -86,39 +92,63 @@ class DisplayData extends Component {
     Renders the list items
      */
     renderData = item => (
-        <div>
-            <Link
-                to={{
-                    pathname: `${this.props.url}/${item.title.split(' ').join('_')}`,
-                    state: item,
-                }}
-            >
+        <div className="card column large-4" style={{width: "300px", border: '1px solid black'}}>
+            <div className="card-divider">
                 {item.title}
-            </Link>
-            <p>rating: {item.rating || 'Not Yet rated'}</p>
+            </div>
+            <div className="card-section">
+                <h4>rating: {item.rating || 'Not Yet rated'}</h4>
+                <p>{item.description}</p>
+                <Link
+                    to={{
+                        pathname: `${this.props.url}/${item.title.split(' ').join('_')}`,
+                        state: item,
+                    }}
+                >
+                    <img src={item.poster ? item.poster.large : item.image.poster} />
+                </Link>
+            </div>
         </div>
     );
 
     render() {
         return (
             <div>
-                <button className="button" onClick={() => this.handleAlphaNumericalSort('title')}>
-                    Sort Name Alphabetically
-                </button>
-                <button className="button" onClick={() => this.handleInverseSort('title')}>
-                    Sort Names in reverse
-                </button>
-                <button className="button" onClick={this.handleOriginalSort}>Show Original</button>
-                <button className="button" onClick={() => this.handleAlphaNumericalSort('rating')}>
-                    Sort By Rating
-                </button>
-                <button className="button" onClick={() => this.handleInverseSort('rating')}>
-                    Sort Rating in Reverse
-                </button>
+                <div className="row">
+                    <div className="column">
+                        <button className="button"
+                                onClick={() => this.handleAlphaNumericalSort('title')}>
+                            Sort Name Alphabetically
+                        </button>
+                    </div>
+                    <div className="column">
+                        <button className="button" onClick={() => this.handleInverseSort('title')}>
+                            Sort Names in reverse
+                        </button>
+                    </div>
+                    <div className="column">
+                        <button className="button" onClick={this.handleOriginalSort}>Show Original
+                        </button>
+                    </div>
+                    <div className="column">
+                        <button className="button"
+                                onClick={() => this.handleAlphaNumericalSort('rating')}>
+                            Sort By Rating
+                        </button>
+                    </div>
+                    <div className="column">
+                        <button className="button" onClick={() => this.handleInverseSort('rating')}>
+                            Sort Rating in Reverse
+                        </button>
+                    </div>
+                </div>
+                <div className="row marg-top-20">
+
                 {[...this.state.data]
                     .slice(this.state.startIndex, this.state.endIndex)
                     .map(item => this.renderData(item))}
                 {this.renderPagination()}
+                </div>
             </div>
         );
     }

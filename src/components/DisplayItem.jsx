@@ -49,15 +49,6 @@ class DisplayItem extends Component {
                 {rating ? <p>{rating}</p> : null}
                 <hr />
                 {description ? <p>{description}</p> : null}
-                <div style={{ backgroundColor: '#1f4662', color: '#fff', fontSize: '12px' }}>
-                    <div style={{ backgroundColor: '#193549', padding: '5px 10px', fontFamily: 'monospace', color: '#ffc600' }}>
-                        <strong>Debug</strong>
-                    </div>
-                    <pre style={{ display: 'block', padding: '10px 30px', margin: '0', overflow: 'scroll' }}>
-                        {JSON.stringify(this.props, null, 2)}
-                    </pre>
-                </div>
-                <hr />
                 {title ? <p>{title}</p> : null}
                 {poster ? <img src={poster.large} alt="" /> : <img src={image.poster} />}
                 {url ? <a href={url.url}>View on IMBD</a> : null}
