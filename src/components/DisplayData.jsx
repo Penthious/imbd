@@ -66,7 +66,7 @@ class DisplayData extends Component {
                     : null}
             </div>
             {this.state.pages.map(page => (
-                <div className="column small-1">
+                <div key={page} className="column small-1">
                     <button
                         onClick={() => this.handlePagination(page)}
                         className={this.state.currentPage === page ? 'button hollow' : 'button'}
@@ -91,8 +91,9 @@ class DisplayData extends Component {
     /*
     Renders the list items
      */
-    renderData = item => (
-        <div className="card column large-4" style={{width: "300px", border: '1px solid black'}}>
+    renderData = (item, index) => (
+        <div key={`${item.imbd_id}${index}`} className="card column small-4"
+             style={{ width: '300px', border: '1px solid black' }}>
             <div className="card-divider">
                 {item.title}
             </div>
@@ -105,7 +106,8 @@ class DisplayData extends Component {
                         state: item,
                     }}
                 >
-                    <img src={item.poster ? item.poster.large : item.image.poster} />
+                    <img src={item.poster ? item.poster.large : item.image.poster}
+                         alt={item.title} />
                 </Link>
             </div>
         </div>
@@ -144,10 +146,10 @@ class DisplayData extends Component {
                 </div>
                 <div className="row marg-top-20">
 
-                {[...this.state.data]
-                    .slice(this.state.startIndex, this.state.endIndex)
-                    .map(item => this.renderData(item))}
-                {this.renderPagination()}
+                    {[...this.state.data]
+                        .slice(this.state.startIndex, this.state.endIndex)
+                        .map((item, index) => this.renderData(item, index))}
+                    {this.renderPagination()}
                 </div>
             </div>
         );

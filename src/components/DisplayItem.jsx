@@ -8,25 +8,17 @@ class DisplayItem extends Component {
         }
     }
 
-    renderMovie = movie => (
-        <div>
+    renderMovie = (movie, index) => (
+        <div key={`${movie.title}${index}`}>
             <p>{movie.title}</p>
             <a href={movie.url}>See On IMBD</a>
-        </div>
-    );
-
-    renderActorMovies = movies => (
-        <div>
-            {this.props.match.path === `${this.props.routes.actorShow}/:actor`
-                ? movies.map(movie => this.renderMovie(movie))
-                : null}
         </div>
     );
 
     renderMovies = (movies, route, url) => (
         <div>
             {this.props.match.path === `${route}/:${url}`
-                ? movies.map(movie => this.renderMovie(movie))
+                ? movies.map((movie, index) => this.renderMovie(movie, index))
                 : null}
         </div>
     );

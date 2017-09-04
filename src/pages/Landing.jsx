@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
+import Modal from 'react-modal';
 import { Route, Switch } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Search from '../components/Search';
@@ -27,7 +28,7 @@ class Landing extends Component {
     }
 
     getMovieData = (url, key, route = null) => {
-        this.setState({loading: true});
+        this.setState({ loading: true });
         Axios.get(url)
             .then(
                 response => console.log(response) ||
@@ -37,8 +38,8 @@ class Landing extends Component {
                         [key]: {
                             [key]: response.data !== null ? response.data : [],
                             route,
-                            loading: false,
                         },
+                        loading: false,
                     }),
             )
             .catch(error => console.log(error));
@@ -93,7 +94,21 @@ class Landing extends Component {
 
     render() {
         return (
-            <div className="someclass">
+            <div>
+                <Modal
+                    isOpen={this.state.loading}
+                    contentLabel="Modal"
+                    style={{
+                        content: {
+                            opacity: '.5', border: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        },
+                    }}
+                >
+                    <p style={{textAlign: 'center'}}>loading</p>
+                </Modal>
                 <div>
                     <Navbar routes={this.props.routes} />
                 </div>
