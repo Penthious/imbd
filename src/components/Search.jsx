@@ -22,6 +22,9 @@ const Search = props => console.log(props.name) ||
     {props.directors.length > 0
         ? <DisplayData data={props.directors} url={props.routes.directorShow} />
         : null}
+    {props.imbdID.length > 0
+        ? <DisplayData data={props.imbdID} url={props.imbdRoute} />
+        : null}
 </div>;
 
 Search.propTypes = {};
@@ -30,6 +33,7 @@ Search.defaultProps = {
     actors: { actors: [] },
     directors: { directors: [] },
     votes: { votes: [] },
+    imbdID: { imbdID: []},
 };
 
 export default Search;
