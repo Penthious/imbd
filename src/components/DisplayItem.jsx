@@ -22,9 +22,9 @@ class DisplayItem extends Component {
             }
         </div>;
 
-    renderMovies = (movies, url) =>
+    renderMovies = (movies, route, url) =>
         <div>
-            {this.props.match.path === `${this.props.routes.directorShow}/:${url}` ? movies.map(movie =>
+            {this.props.match.path === `${route}/:${url}` ? movies.map(movie =>
                 this.renderMovie(movie)) : null
             }
         </div>;
@@ -33,11 +33,6 @@ class DisplayItem extends Component {
         if (!this.props.location.state) {
             return null;
         }
-        console.log('========');
-        console.log('========');
-        console.log('DisplayItem-38', this.props.location);
-        console.log('========');
-        console.log('========');
         const {
             rating, description, title, poster, url, image, filmography,
         } = this.props.location.state;
@@ -53,9 +48,9 @@ class DisplayItem extends Component {
                 {
                     filmography ?
                         <div>
-                            {filmography.actor ? this.renderMovies(filmography.actor, 'actor') : null}
-                            {filmography.actress ? this.renderMovies(filmography.actress, 'actor') : null}
-                            {filmography.director ? this.renderMovies(filmography.director, 'director') : null}
+                            {filmography.actor ? this.renderMovies(filmography.actor, this.props.routes.actorShow, 'actor') : null}
+                            {filmography.actress ? this.renderMovies(filmography.actress, this.props.routes.actorShow, 'actor') : null}
+                            {filmography.director ? this.renderMovies(filmography.director, this.props.routes.directorShow, 'director') : null}
                         </div>
                         : null
                 }
