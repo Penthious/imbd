@@ -21,6 +21,11 @@ class DisplayData extends Component {
         this.handlePagination(1);
     }
 
+    componentWillReceiveProps(newProps) {
+        this.setState({data: newProps.data});
+    }
+
+
     handleAlphaNumericalSort = key => this.setState({
         data: [...this.props.data].sort((a, b) => {
             if (a[key] < b[key]) return -1;
@@ -52,28 +57,6 @@ class DisplayData extends Component {
                 <p onClick={() => this.handleAlphaNumericalSort("title")}>
                     Sort Name Alphabetically
                 </p>
-                <div style={{ backgroundColor: "#1f4662", color: "#fff", fontSize: "12px" }}>
-                    <div
-                        style={{
-                            backgroundColor: "#193549",
-                            padding: "5px 10px",
-                            fontFamily: "monospace",
-                            color: "#ffc600",
-                        }}
-                    >
-                        <strong>Debug</strong>
-                    </div>
-                    <pre
-                        style={{
-                            display: "block",
-                            padding: "10px 30px",
-                            margin: "0",
-                            overflow: "scroll",
-                        }}
-                    >
-                        {/* {JSON.stringify(this.state, null, 2)}*/}
-                    </pre>
-                </div>
                 <button className="button" onClick={() => this.handleInverseSort("title")}>
                     Sort Names in reverse
                 </button>

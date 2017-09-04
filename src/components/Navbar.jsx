@@ -8,7 +8,6 @@ const Navbar = props => (
             <li><Link to={props.routes.titleSearch}>Titles</Link></li>
             <li><Link to={props.routes.directorSearch}>Directors</Link></li>
             <li><Link to={props.routes.actorSearch}>Actors</Link></li>
-            <li><Link to={props.routes.votesSearch}>Votes</Link></li>
         </ul>
     </div>
 );

@@ -19,6 +19,9 @@ const Search = props => console.log(props.name) ||
     {props.actors.length > 0
         ? <DisplayData data={props.actors} url={props.routes.actorShow} />
         : null}
+    {props.directors.length > 0
+        ? <DisplayData data={props.directors} url={props.routes.directorShow} />
+        : null}
 </div>;
 
 Search.propTypes = {};

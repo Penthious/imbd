@@ -2,7 +2,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 // import PrettierWebpackPlugin from 'prettier-webpack-plugin';
-import { PrettierEslintPlugin } from 'prettier-eslint-webpack-plugin';
+// import { PrettierEslintPlugin } from 'prettier-eslint-webpack-plugin';
 import path from 'path';
 import config from './environment/development';
 
@@ -55,13 +55,13 @@ export default {
                 postcss: () => [autoprefixer],
             },
         }),
-        new PrettierEslintPlugin({
-            logLevel: 'trace',
-            prettierOptions: {
-                singleQuote: false,
-                trailingComma: true,
-            },
-        }),
+        // new PrettierEslintPlugin({
+        //     logLevel: 'trace',
+        //     prettierOptions: {
+        //         singleQuote: false,
+        //         trailingComma: true,
+        //     },
+        // }),
         // new PrettierWebpackPlugin({
         //     tabWidth: 4,
         //     semi: true,

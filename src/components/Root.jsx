@@ -46,10 +46,6 @@ class Root extends React.Component {
                             path={`${routes.directorShow}/:director`}
                             render={props => <Landing routes={routes} {...props} />}
                         />
-                        <Route
-                            path={routes.votesSearch}
-                            render={props => <Landing routes={routes} {...props} />}
-                        />
                         <Route component={NotFoundPage} landing={routes.landing} />
                     </Switch>
                 </ConnectedRouter>

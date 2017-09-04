@@ -14,7 +14,6 @@ const INITIAL_STATE = {
     actor: {},
     directors: { directors: [], error: null },
     director: {},
-    votes: { votes: [], error: null },
 };
 
 class Landing extends Component {
@@ -25,34 +24,6 @@ class Landing extends Component {
         };
     }
 
-    handleChange = (event, searchParam) => {
-        console.log("========");
-        console.log("========");
-        console.log("Landing-31", event.target.value, searchParam);
-        console.log("========");
-        console.log("========");
-        this.setState({ search: { value: event.target.value, searchParam } });
-    };
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.processSearch(this.state.search);
-        this.setState({ search: {} });
-    };
-
-    processSearch = ({ searchParam, value: searchValue }) => {
-        const url = "https://theimdbapi.org/api/";
-        const formattedSearchValue = searchValue.split(" ").join("+");
-        if (searchParam === "title") {
-            this.getMovies(url, formattedSearchValue);
-        } else if (searchParam === "actor") {
-            this.getActors(url, formattedSearchValue);
-        } else if (searchParam === "director") {
-            this.getDirectors(url, formattedSearchValue);
-        } else if (searchParam === "votes") {
-            this.getVotes(url, formattedSearchValue);
-        }
-    };
     getMovies = (url, param) => Axios.get(`${url}find/movie?title=${param}`)
         .then(
             response => console.log(response) ||
@@ -79,20 +50,37 @@ class Landing extends Component {
             this.setState({
                 ...this.state,
                 search: { value: "", search: "" },
-                movies: response.data !== null ? response.data : [],
+                directors: { directors: response.data !== null ? response.data : [] },
             }),
         )
         .catch(error => console.log(error));
-    getVotes = (url, param) => Axios.get(`${url}find/movie?title=${param}`)
-        .then(
-            response => console.log(response) ||
-            this.setState({
-                ...this.state,
-                search: { value: "", search: "" },
-                movies: response.data !== null ? response.data : [],
-            }),
-        )
-        .catch(error => console.log(error));
+
+    handleChange = (event, searchParam) => {
+        this.setState({ search: { value: event.target.value, searchParam } });
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.processSearch(this.state.search);
+        console.log('========');
+        console.log('========');
+        console.log('Landing-67', this.state);
+        console.log('========');
+        console.log('========');
+    };
+
+    processSearch = ({ searchParam, value: searchValue }) => {
+        const url = "https://theimdbapi.org/api/";
+        const formattedSearchValue = searchValue.split(" ").join("+");
+        if (searchParam === "title") {
+            this.getMovies(url, formattedSearchValue);
+        } else if (searchParam === "actor") {
+            this.getActors(url, formattedSearchValue);
+        } else if (searchParam === "director") {
+            this.getDirectors(url, formattedSearchValue);
+        }
+    };
+
 
     render() {
         return (
@@ -117,7 +105,7 @@ class Landing extends Component {
                     <Route
                         path={`${this.props.routes.titleShow}/:title`}
                         render={props => (
-                            <DisplayItem name="Test" routes={this.props.routes} {...props} />
+                            <DisplayItem routes={this.props.routes} {...props} />
                         )}
                     />
                     <Route
@@ -138,7 +126,7 @@ class Landing extends Component {
                     <Route
                         path={`${this.props.routes.actorShow}/:actor`}
                         render={props => (
-                            <DisplayItem name="Test" routes={this.props.routes} {...props} />
+                            <DisplayItem routes={this.props.routes} {...props} />
                         )}
                     />
                     <Route
@@ -149,6 +137,7 @@ class Landing extends Component {
                                 handleChange={this.handleChange}
                                 search="director"
                                 value={this.state.search.value}
+                                directors={this.state.directors.directors}
                                 name="Search for directors"
                                 routes={this.props.routes}
                                 {...props}
@@ -158,21 +147,7 @@ class Landing extends Component {
                     <Route
                         path={`${this.props.routes.directorShow}/:director`}
                         render={props => (
-                            <DisplayItem name="Test" routes={this.props.routes} {...props} />
-                        )}
-                    />
-                    <Route
-                        path={this.props.routes.votesSearch}
-                        render={props => (
-                            <Search
-                                handleSubmit={this.handleSubmit}
-                                handleChange={this.handleChange}
-                                search="votes"
-                                value={this.state.search.value}
-                                name="Search for votes"
-                                routes={this.props.routes}
-                                {...props}
-                            />
+                            <DisplayItem routes={this.props.routes} {...props} />
                         )}
                     />
                 </Switch>
