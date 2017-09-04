@@ -13,7 +13,7 @@ const INITIAL_STATE = {
     actors: { actors: [], error: null },
     actor: {},
     directors: { directors: [], error: null },
-    imbdID: { imbdID: [], route: '', error: null },
+    imbdID: { imbdID: null, route: '', error: null },
     director: {},
 };
 
@@ -25,44 +25,17 @@ class Landing extends Component {
         };
     }
 
-    getMovies = (url, param) => Axios.get(`${url}find/movie?title=${param}`)
-        .then(
-            response => console.log(response) ||
-                this.setState({
-                    ...this.state,
-                    search: { value: '', search: '' },
-                    movies: { movies: response.data !== null ? response.data : [] },
-                }),
-        )
-        .catch(error => console.log(error));
-    getActors = (url, param) => Axios.get(`${url}find/person?name=${param}`)
-        .then(
-            response => console.log(response.data) ||
-                this.setState({
-                    ...this.state,
-                    search: { value: '', search: '' },
-                    actors: { actors: response.data !== null ? response.data : [] },
-                }),
-        )
-        .catch(error => console.log(error));
-    getDirectors = (url, param) => Axios.get(`${url}find/person?name=${param}`)
-        .then(
-            response => console.log(response) ||
-                this.setState({
-                    ...this.state,
-                    search: { value: '', search: '' },
-                    directors: { directors: response.data !== null ? response.data : [] },
-                }),
-        )
-        .catch(error => console.log(error));
-    getByID = (url, param, route) => {
-        Axios.get(`${url}${param}`)
+    getMovieData = (url, key, route = null) => {
+        Axios.get(url)
             .then(
                 response => console.log(response) ||
                     this.setState({
                         ...this.state,
                         search: { value: '', search: '' },
-                        imbdID: { imbdID: response.data !== null ? [response.data] : [], route },
+                        [key]: {
+                            [key]: response.data !== null ? response.data : [],
+                            route,
+                        },
                     }),
             )
             .catch(error => console.log(error));
@@ -81,20 +54,39 @@ class Landing extends Component {
         const url = 'https://theimdbapi.org/api/';
         const formattedSearchValue = searchValue.split(' ').join('+');
         if (searchParam === 'title') {
-            this.getMovies(url, formattedSearchValue);
+            this.getMovieData(
+                `${url}find/movie?title=${formattedSearchValue}`,
+                'movies',
+                this.props.routes.titleShow,
+            );
         } else if (searchParam === 'actor') {
-            this.getActors(url, formattedSearchValue);
+            this.getMovieData(
+                `${url}find/person?name=${formattedSearchValue}`,
+                'actors',
+                this.props.routes.titleShow,
+            );
         } else if (searchParam === 'director') {
-            this.getDirectors(url, formattedSearchValue);
+            this.getMovieData(
+                `${url}find/person?name=${formattedSearchValue}`,
+                'directors',
+                this.props.routes.titleShow,
+            );
         } else if (searchParam === 'id') {
             if (searchValue[0] === 't') {
-                this.getByID(`${url}movie?movie_id=`, searchValue, this.props.routes.titleShow);
+                this.getMovieData(
+                    `${url}movie?movie_id=${formattedSearchValue}`,
+                    'imbdID',
+                    this.props.routes.titleShow,
+                );
             } else if (searchValue[0] === 'n') {
-                this.getByID(`${url}person?person_id=`, searchValue, this.props.routes.actorShow);
+                this.getMovieData(
+                    `${url}person?person_id=${formattedSearchValue}`,
+                    'imbdID',
+                    this.props.routes.titleShow,
+                );
             }
         }
     };
-
 
     render() {
         return (
@@ -118,9 +110,14 @@ class Landing extends Component {
                     />
                     <Route
                         path={`${this.props.routes.titleShow}/:title`}
-                        render={props => (
-                            <DisplayItem routes={this.props.routes} {...props} />
-                        )}
+                        render={props =>
+                            <DisplayItem
+                                handleSubmit={this.handleSubmit}
+                                handleChange={this.handleChange}
+                                routes={this.props.routes}
+                                {...props}
+                            />
+                        }
                     />
                     <Route
                         path={this.props.routes.actorSearch}
@@ -139,9 +136,14 @@ class Landing extends Component {
                     />
                     <Route
                         path={`${this.props.routes.actorShow}/:actor`}
-                        render={props => (
-                            <DisplayItem routes={this.props.routes} {...props} />
-                        )}
+                        render={props =>
+                            <DisplayItem
+                                handleSubmit={this.handleSubmit}
+                                handleChange={this.handleChange}
+                                routes={this.props.routes}
+                                {...props}
+                            />
+                        }
                     />
                     <Route
                         path={this.props.routes.directorSearch}
@@ -160,9 +162,14 @@ class Landing extends Component {
                     />
                     <Route
                         path={`${this.props.routes.directorShow}/:director`}
-                        render={props => (
-                            <DisplayItem routes={this.props.routes} {...props} />
-                        )}
+                        render={props =>
+                            <DisplayItem
+                                handleSubmit={this.handleSubmit}
+                                handleChange={this.handleChange}
+                                routes={this.props.routes}
+                                {...props}
+                            />
+                        }
                     />
                     <Route
                         path={this.props.routes.idSearch}
@@ -172,7 +179,7 @@ class Landing extends Component {
                                 handleChange={this.handleChange}
                                 search="id"
                                 value={this.state.search.value}
-                                imbdID={this.state.imbdID.imbdID}
+                                imbdData={[this.state.imbdID.imbdID]}
                                 imbdRoute={this.state.imbdID.route}
                                 name="Search by ID"
                                 routes={this.props.routes}

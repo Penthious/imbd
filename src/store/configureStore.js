@@ -1,10 +1,10 @@
-import { applyMiddleware, compose, createStore } from "redux";
-import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
-import { routerMiddleware } from "react-router-redux";
-import createHistory from "history/createBrowserHistory";
-import thunk from "redux-thunk";
-import logger from "redux-logger";
-import rootReducer from "../reducers";
+import { applyMiddleware, compose, createStore } from 'redux';
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+import { routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import rootReducer from '../reducers';
 
 export const history = createHistory();
 
@@ -31,11 +31,11 @@ function configureStoreDev() {
         // inside a dispatch or between dispatches.
         reduxImmutableStateInvariant({
             ignore: [
-                "form.businessCreate.values.image.0.lastModifiedDate",
+                'form.businessCreate.values.image.0.lastModifiedDate',
                 // 'form.subscription.values.exp_month',
                 // 'form.subscription.values.exp',
                 // 'form.subscription.values.exp_year',
-                "form.businessEdit.values.image.0.lastModifiedDate",
+                'form.businessEdit.values.image.0.lastModifiedDate',
             ],
         }),
 
@@ -56,8 +56,8 @@ function configureStoreDev() {
 
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers
-        module.hot.accept("../reducers", () => {
-            const nextReducer = require("../reducers").default; // eslint-disable-line global-require
+        module.hot.accept('../reducers', () => {
+            const nextReducer = require('../reducers').default; // eslint-disable-line global-require
             store.replaceReducer(nextReducer);
         });
     }
@@ -65,7 +65,7 @@ function configureStoreDev() {
     return store;
 }
 
-const configureStore = process.env.NODE_ENV === "production"
+const configureStore = process.env.NODE_ENV === 'production'
     ? configureStoreProd
     : configureStoreDev;
 

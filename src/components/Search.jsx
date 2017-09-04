@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import DisplayData from "./DisplayData";
+import React from 'react';
+import PropTypes from 'prop-types';
+import DisplayData from './DisplayData';
 
-const Search = props => console.log(props.name) ||
+const Search = props => console.log(props, 'testing') ||
 <div>
     {props.name}
     <form onSubmit={event => props.handleSubmit(event)}>
@@ -22,8 +22,8 @@ const Search = props => console.log(props.name) ||
     {props.directors.length > 0
         ? <DisplayData data={props.directors} url={props.routes.directorShow} />
         : null}
-    {props.imbdID.length > 0
-        ? <DisplayData data={props.imbdID} url={props.imbdRoute} />
+    {props.imbdData.filter(Boolean).length > 0
+        ? <DisplayData data={props.imbdData} url={props.imbdRoute} />
         : null}
 </div>;
 
@@ -33,7 +33,7 @@ Search.defaultProps = {
     actors: { actors: [] },
     directors: { directors: [] },
     votes: { votes: [] },
-    imbdID: { imbdID: []},
+    imbdData: [],
 };
 
 export default Search;

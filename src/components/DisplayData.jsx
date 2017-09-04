@@ -53,13 +53,13 @@ class DisplayData extends Component {
     /*
     Renders the pagination buttons
      */
-    renderPagination = () =>
+    renderPagination = () => (
         <div>
             {this.state.startPage !== this.state.currentPage
                 ? <button
                     onClick={() => this.handlePagination(this.state.currentPage - 1)}
                     className="button"
-                >
+                  >
                     {'<'}
                 </button>
                 : null}
@@ -75,29 +75,29 @@ class DisplayData extends Component {
                 ? <button
                     onClick={() => this.handlePagination(this.state.currentPage + 1)}
                     className="button"
-                >
+                  >
                     {'>'}
                 </button>
                 : null}
-        </div>;
+        </div>
+    );
 
-        /*
-        Renders the list items
-         */
-    renderData = (item) =>
+    /*
+    Renders the list items
+     */
+    renderData = item => (
         <div>
             <Link
                 to={{
-                    pathname: `${this.props.url}/${item.title
-                        .split(' ')
-                        .join('_')}`,
+                    pathname: `${this.props.url}/${item.title.split(' ').join('_')}`,
                     state: item,
                 }}
             >
                 {item.title}
             </Link>
             <p>rating: {item.rating || 'Not Yet rated'}</p>
-        </div>;
+        </div>
+    );
 
     render() {
         return (
@@ -115,11 +115,9 @@ class DisplayData extends Component {
                 <button className="button" onClick={() => this.handleInverseSort('rating')}>
                     Sort Rating in Reverse
                 </button>
-                {
-                    [...this.state.data]
+                {[...this.state.data]
                     .slice(this.state.startIndex, this.state.endIndex)
-                    .map(item => this.renderData(item))
-                }
+                    .map(item => this.renderData(item))}
                 {this.renderPagination()}
             </div>
         );

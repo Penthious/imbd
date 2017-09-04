@@ -58,7 +58,7 @@ export default {
         // new PrettierEslintPlugin({
         //     logLevel: 'trace',
         //     prettierOptions: {
-        //         singleQuote: false,
+        //         singleQuote: true,
         //         trailingComma: true,
         //     },
         // }),
