@@ -39,7 +39,7 @@ class DisplayItem extends Component {
                 <p>{movie.title}</p>
             </div>
             <div className="column">
-                <a href={movie.url}>See On IMBD</a>
+                <a href={movie.url} target="_blank">See On IMBD</a>
             </div>
         </div>
     );
