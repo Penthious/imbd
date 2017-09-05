@@ -1,4 +1,13 @@
-.layout-wrapper{
+.layout-container {
+  overflow:auto;
+  background: gainsboro;
+  height: 100%;
+}
+
+.layout-wrapper {
   margin-left: 50px;
+  overflow:auto;
   margin-right: 50px;
+  background: white;
+  height: 100vh;
 }

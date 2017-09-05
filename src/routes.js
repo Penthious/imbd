@@ -8,6 +8,5 @@ export default {
     directorShow: '/director/show',
     actorShow: '/actor/show',
     idSearch: '/imbd-id',
-
     notFound: '*',
 };

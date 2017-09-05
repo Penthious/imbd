@@ -2,12 +2,37 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class DisplayItem extends Component {
+    static propTypes = {
+        location: PropTypes.object,
+        history: PropTypes.object,
+        routes: PropTypes.object,
+        match: PropTypes.object,
+    };
+
+    static defaultProps = {
+        rating: 'No rating',
+        location: {
+            state: {
+                filmography: {
+                    actor: [],
+                    actress: [],
+                    producer: [],
+                },
+            },
+        },
+    };
+
     componentWillMount() {
         if (!this.props.location.state) {
             this.props.history.push(this.props.routes.landing);
         }
     }
 
+    /*
+     * Displays the movie
+     * @param {Object} movie - The movie data
+     * @param {int} index - The index of the movie
+     */
     renderMovie = (movie, index) => (
         <div key={`${movie.title}${index}`} className="row">
             <div className="column small-offset-3">
@@ -19,6 +44,12 @@ class DisplayItem extends Component {
         </div>
     );
 
+    /*
+     * Displays a list of movies
+     * @param {Array.<Object>} movies - The movie data
+     * @param {string} route - The route name
+     * @param {string} url - The route parameter
+     */
     renderMovies = (movies, route, url) => (
         <div>
             {this.props.match.path === `${route}/:${url}`
@@ -42,7 +73,7 @@ class DisplayItem extends Component {
         } = this.props.location.state;
         return (
             <div>
-                <div className="row marg-top-20 small-offset-4">
+                <div className="row marg-top-20 text-center">
                     <div className="column">
                         {poster ?
                             <img src={poster.large} alt="image"
@@ -51,7 +82,7 @@ class DisplayItem extends Component {
                                    style={{ width: '300px', height: '600px' }} />}
                     </div>
                 </div>
-                <div className="row">
+                <div className="row text-center">
                     <div className="column small-offset-4 small-2">
                         {title ? <p>{title}</p> : null}
                     </div>
@@ -59,13 +90,13 @@ class DisplayItem extends Component {
                         {rating ? <p>Rating: {rating}</p> : null}
                     </div>
                 </div>
-                <div className="row small-offset-2">
+                <div className="row text-center">
                     <div className="column">
                         {description ? <p>{description}</p> : null}
                     </div>
                 </div>
-                <div className="row">
-                    <div className="column small-offset-5">
+                <div className="row text-center">
+                    <div className="column">
                         {url ? <a href={url.url}>View on IMBD</a> : null}
                     </div>
                 </div>
@@ -99,21 +130,5 @@ class DisplayItem extends Component {
         );
     }
 }
-
-DisplayItem.propTypes = {
-    location: PropTypes.object,
-};
-DisplayItem.defaultProps = {
-    rating: 'No rating',
-    location: {
-        state: {
-            filmography: {
-                actor: [],
-                actress: [],
-                producer: [],
-            },
-        },
-    },
-};
 
 export default DisplayItem;

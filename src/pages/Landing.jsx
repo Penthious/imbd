@@ -27,6 +27,12 @@ class Landing extends Component {
         };
     }
 
+    /*
+     * Handles getting data through ajax
+     * @param {string} url - The url we want to search
+     * @param {string} key - The key to set the correct object
+     * @param {string|null} route - The front end route if we need it
+     */
     getMovieData = (url, key, route = null) => {
         this.setState({ loading: true });
         Axios.get(url)
@@ -42,18 +48,39 @@ class Landing extends Component {
                         loading: false,
                     }),
             )
-            .catch(error => console.log(error));
+            .catch(error => console.log(error) ||
+                this.setState({
+                    ...this.state,
+                    search: { value: '', search: '' },
+                    loading: false,
+                }),
+            );
     };
 
+    /*
+     * Handles what url we want to hit
+     * @param {Object} event - The event that fired
+     * @param {string} searchParam - The type of search
+     */
     handleChange = (event, searchParam) => {
         this.setState({ search: { value: event.target.value, searchParam } });
     };
 
+    /*
+     * Handles the submit to set our data
+     * @param {Object} event - The event that fired
+     */
     handleSubmit = (event) => {
         event.preventDefault();
         this.processSearch(this.state.search);
     };
 
+    /*
+     * Handles what url we want to hit
+     * @param {Object} param
+     * @param {string} param.searchParam - The type of search
+     * @param {string} param.searchValue - The value we want to search for
+     */
     processSearch = ({ searchParam, value: searchValue }) => {
         const url = 'https://theimdbapi.org/api/';
         const formattedSearchValue = searchValue.split(' ').join('+');
@@ -107,102 +134,104 @@ class Landing extends Component {
                         },
                     }}
                 >
-                    <p style={{textAlign: 'center'}}>loading</p>
+                    <p style={{ textAlign: 'center' }}>loading</p>
                 </Modal>
                 <div>
                     <Navbar routes={this.props.routes} />
                 </div>
-                <div className="layout-wrapper">
-                    <Switch>
-                        <Route
-                            path={this.props.routes.titleSearch}
-                            render={props => (
-                                <Search
-                                    handleSubmit={this.handleSubmit}
-                                    handleChange={this.handleChange}
-                                    name="Search for movies"
-                                    value={this.state.search.value}
-                                    routes={this.props.routes}
-                                    {...props}
-                                    {...this.state}
-                                    search="title"
-                                />
-                            )}
-                        />
-                        <Route
-                            path={`${this.props.routes.titleShow}/:title`}
-                            render={props =>
-                                <DisplayItem
-                                    routes={this.props.routes}
-                                    {...props}
-                                />
-                            }
-                        />
-                        <Route
-                            path={this.props.routes.actorSearch}
-                            render={props => (
-                                <Search
-                                    handleSubmit={this.handleSubmit}
-                                    handleChange={this.handleChange}
-                                    search="actor"
-                                    value={this.state.search.value}
-                                    actors={this.state.actors.actors}
-                                    name="Search for actors"
-                                    routes={this.props.routes}
-                                    {...props}
-                                />
-                            )}
-                        />
-                        <Route
-                            path={`${this.props.routes.actorShow}/:actor`}
-                            render={props =>
-                                <DisplayItem
-                                    routes={this.props.routes}
-                                    {...props}
-                                />
-                            }
-                        />
-                        <Route
-                            path={this.props.routes.directorSearch}
-                            render={props => (
-                                <Search
-                                    handleSubmit={this.handleSubmit}
-                                    handleChange={this.handleChange}
-                                    search="director"
-                                    value={this.state.search.value}
-                                    directors={this.state.directors.directors}
-                                    name="Search for directors"
-                                    routes={this.props.routes}
-                                    {...props}
-                                />
-                            )}
-                        />
-                        <Route
-                            path={`${this.props.routes.directorShow}/:director`}
-                            render={props =>
-                                <DisplayItem
-                                    routes={this.props.routes}
-                                    {...props}
-                                />
-                            }
-                        />
-                        <Route
-                            path={this.props.routes.idSearch}
-                            render={props => (
-                                <Search
-                                    handleSubmit={this.handleSubmit}
-                                    handleChange={this.handleChange}
-                                    search="id"
-                                    value={this.state.search.value}
-                                    imbdData={[this.state.imbdID.imbdID]}
-                                    imbdRoute={this.state.imbdID.route}
-                                    name="Search by ID"
-                                    routes={this.props.routes}
-                                    {...props}
-                                />
-                            )}
-                        />
-                    </Switch>
+                <div className="layout-container">
+                    <div className="layout-wrapper">
+                        <Switch>
+                            <Route
+                                path={this.props.routes.titleSearch}
+                                render={props => (
+                                    <Search
+                                        handleSubmit={this.handleSubmit}
+                                        handleChange={this.handleChange}
+                                        name="Search for movies"
+                                        value={this.state.search.value}
+                                        movies={this.state.movies}
+                                        routes={this.props.routes}
+                                        {...props}
+                                        search="title"
+                                    />
+                                )}
+                            />
+                            <Route
+                                path={`${this.props.routes.titleShow}/:title`}
+                                render={props =>
+                                    <DisplayItem
+                                        routes={this.props.routes}
+                                        {...props}
+                                    />
+                                }
+                            />
+                            <Route
+                                path={this.props.routes.actorSearch}
+                                render={props => (
+                                    <Search
+                                        handleSubmit={this.handleSubmit}
+                                        handleChange={this.handleChange}
+                                        search="actor"
+                                        value={this.state.search.value}
+                                        actors={this.state.actors}
+                                        name="Search for actors"
+                                        routes={this.props.routes}
+                                        {...props}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path={`${this.props.routes.actorShow}/:actor`}
+                                render={props =>
+                                    <DisplayItem
+                                        routes={this.props.routes}
+                                        {...props}
+                                    />
+                                }
+                            />
+                            <Route
+                                path={this.props.routes.directorSearch}
+                                render={props => (
+                                    <Search
+                                        handleSubmit={this.handleSubmit}
+                                        handleChange={this.handleChange}
+                                        search="director"
+                                        value={this.state.search.value}
+                                        directors={this.state.directors}
+                                        name="Search for directors"
+                                        routes={this.props.routes}
+                                        {...props}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path={`${this.props.routes.directorShow}/:director`}
+                                render={props =>
+                                    <DisplayItem
+                                        routes={this.props.routes}
+                                        {...props}
+                                    />
+                                }
+                            />
+                            <Route
+                                path={this.props.routes.idSearch}
+                                render={props => (
+                                    <Search
+                                        handleSubmit={this.handleSubmit}
+                                        handleChange={this.handleChange}
+                                        search="id"
+                                        value={this.state.search.value}
+                                        imbdData={[this.state.imbdID.imbdID]}
+                                        imbdRoute={this.state.imbdID.route}
+                                        name="Search by ID"
+                                        routes={this.props.routes}
+                                        {...props}
+                                    />
+                                )}
+                            />
+                        </Switch>
+                    </div>
                 </div>
             </div>
         );
